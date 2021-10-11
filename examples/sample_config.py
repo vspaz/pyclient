@@ -4,6 +4,11 @@ config = {
             "read": 5,
             "connect": 5,
         },
+        "retries": {
+            "attempts": 3,
+            "backoff": 0.5,
+            "on_errors": [],
+        }
     },
     "basic_auth": {
         "user": "user",
