@@ -31,5 +31,9 @@ class PyClient:
         )
 
     @staticmethod
+    def _validate_config():
+        pass
+
+    @staticmethod
     def get_http_client(config: dict):
         return PyClient(config=config)
