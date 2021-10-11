@@ -22,6 +22,14 @@ class PyClient:
             )
         )
 
+    def _request(self, url, method, **kwargs):
+        return self._session.request(
+            method=method,
+            url=url,
+            timeout=kwargs.get("timeouts", (5, 5)),
+            **kwargs,
+        )
+
     @staticmethod
     def get_http_client(config: dict):
         return PyClient(config=config)
