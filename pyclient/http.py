@@ -16,6 +16,13 @@ class PyClient:
             prefix=f"{http_config['host']}" + f":{port}/" if port else '/',
             adapter=self._retry_on(config=http_config.get('retries', {})),
         )
+        tls_certificates = config.get('tls', {})
+        if tls_certificates:
+            self._session.verify = tls_certificates['ca_path']
+            self._session.cert = (
+                tls_certificates['client_certificate_path'],
+                tls_certificates['client_key_path'],
+            )
 
     @staticmethod
     def _retry_on(config: dict):
@@ -28,7 +35,6 @@ class PyClient:
         )
 
     def _request(self, url, method, **kwargs):
-
         return self._session.request(
             method=method,
             url=url,
