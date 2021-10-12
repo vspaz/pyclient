@@ -1,6 +1,5 @@
 import requests
 import ujson
-
 from urllib3.util.retry import Retry
 
 requests.models.complexjson = ujson
