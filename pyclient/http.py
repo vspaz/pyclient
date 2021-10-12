@@ -8,25 +8,32 @@ requests.models.complexjson = ujson
 
 class PyClient:
     def __init__(self, config: dict):
+        # TODO: add validation.
         self._session: requests.Session = requests.Session()
-        self._session.mount("https://", self._retry_on(config=config))
-        self._session.mount("http://", self._retry_on(config=config))
+        http_config = config['http']
+        port = str(http_config.get('port', ''))
+
+        self._session.mount(
+            prefix=f"{http_config['host']}" + f":{port}/" if port else '/',
+            adapter=self._retry_on(config=http_config.get('retries', {})),
+        )
 
     @staticmethod
     def _retry_on(config: dict):
         return requests.adapters.HTTPAdapter(
             max_retires=Retry(
-                total=config.get("retries", 3),
-                backoff_factor=config.get("backoff", 0.5),
-                status_forcelist=config.get("on_errors", []),
-            )
+                total=config.get('retries', 3),
+                backoff_factor=config.get('backoff', 0.5),
+                status_forcelist=config.get('on_errors', []),
+            ),
         )
 
     def _request(self, url, method, **kwargs):
+
         return self._session.request(
             method=method,
             url=url,
-            timeout=kwargs.get("timeouts", (5, 5)),
+            timeout=kwargs.get('timeouts', (5, 5)),
             **kwargs,
         )
 
