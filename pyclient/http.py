@@ -7,7 +7,7 @@ requests.models.complexjson = ujson
 
 class PyClient:
     def __init__(self, config: dict):
-        # TODO: add validation.
+        self._validate_config(config=config)
         self._session: requests.Session = requests.Session()
         http_config = config['http']
         port = str(http_config.get('port', ''))
@@ -23,9 +23,11 @@ class PyClient:
                 tls_certificates['client_certificate_path'],
                 tls_certificates['client_key_path'],
             )
+        timeouts = http_config.get('timeouts', {})
+        self._timeouts = (timeouts.get('connect', 5), timeouts.get('read', 10))
 
     @staticmethod
-    def _retry_on(config: dict):
+    def _retry_on(config: dict) -> requests.adapters.HTTPAdapter:
         return requests.adapters.HTTPAdapter(
             max_retires=Retry(
                 total=config.get('retries', 3),
@@ -38,12 +40,13 @@ class PyClient:
         return self._session.request(
             method=method,
             url=url,
-            timeout=kwargs.get('timeouts', (5, 5)),
+            timeout=kwargs.get('timeouts', self._timeouts),
             **kwargs,
         )
 
     @staticmethod
-    def _validate_config():
+    def _validate_config(config: dict):
+        # TODO: add config validation.
         pass
 
     @staticmethod
