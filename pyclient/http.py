@@ -36,7 +36,7 @@ class PyClient:
     @staticmethod
     def _retry_on(config: dict) -> requests.adapters.HTTPAdapter:
         return requests.adapters.HTTPAdapter(
-            max_retires=Retry(
+            max_retries=Retry(
                 total=config.get('retries', 3),
                 backoff_factor=config.get('backoff', 0.5),
                 status_forcelist=config.get('on_errors', []),
