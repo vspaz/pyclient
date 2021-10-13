@@ -1,0 +1,6 @@
+add-trailing-comma==2.1.0
+flake8==3.9.1
+ipython==7.19.0
+isort==5.9.3
+trim==0.3
+unify==0.1.1
