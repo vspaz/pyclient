@@ -6,7 +6,9 @@ configurable HTTP python client that supports
 - timeouts,
 - tls,
 - basic auth,
-- logging etc.
+- logging
+- uses ultra-fast 'ujson' library for serialization'
+- etc.
 
 sample config
 
