@@ -17,9 +17,10 @@ class PyClient:
         self._session: requests.Session = requests.Session()
         http_config: dict = config['http']
         port: Union[str, int] = str(http_config.get('port', ''))
+        self._host = f"{http_config['host']}" + f":{port}/" if port else '/'
 
         self._session.mount(
-            prefix=f"{http_config['host']}" + f":{port}/" if port else '/',
+            prefix=self._host,
             adapter=self._retry_on(config=http_config.get('retries', {})),
         )
         tls_certificates: dict = config.get('tls', {})
@@ -61,6 +62,9 @@ class PyClient:
             headers=self._add_headers(**kwargs),
             **kwargs,
         )
+
+    def request(self, path: str, method='GET', **kwargs) -> requests.Response:
+        return self._request(url=f'{self._host}{path}', method=method, **kwargs)
 
     @staticmethod
     def _validate_config(config: Dict[str, dict]) -> dict:
