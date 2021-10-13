@@ -66,7 +66,8 @@ class PyClient:
     def request(self, path: str, method='GET', **kwargs) -> requests.Response:
         return self._request(url=self._host + path, method=method, **kwargs)
 
-    async def request_async(self, path: str, method='GET', **kwargs) -> requests.Response:
+    async def request_async(self, path: str, method='GET',
+                            **kwargs) -> requests.Response:
         return self.request(path=path, method=method, **kwargs)
 
     def do_get(self, path: str, **kwargs) -> requests.Response:
@@ -85,10 +86,13 @@ class PyClient:
         return self.request(url=path, method='PATCH', **kwargs)
 
     async def do_path_async(self, path: str, **kwargs) -> requests.Response:
-        await self.request_async(path=path, method='PATCH', **kwargs)
+        return await self.request_async(path=path, method='PATCH', **kwargs)
 
     def do_delete(self, path: str, **kwargs) -> requests.Response:
         return self.request(url=path, method='DELETE', **kwargs)
+
+    async def do_delete_async(self, path: str, **kwargs) -> requests.Response:
+        return await self.request_async(path=path, method='DELETE', **kwargs)
 
     def do_put(self, path: str, **kwargs) -> requests.Response:
         return self.request(url=path, method='PUT', **kwargs)
