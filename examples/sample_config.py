@@ -20,5 +20,5 @@ config = {
         'ca_path': 'path/to/ca',
         'client_certificate_path': 'path/to/client/certificate',
         'client_key_path': 'path/to/key',
-    }
+    },
 }

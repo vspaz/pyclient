@@ -21,13 +21,13 @@ _SAMPLE_CONFIG = {
         'password': 'password',
     },
     'tls': {
-        'ca_path': "",  # 'path/to/ca'
-        'client_certificate_path': "",  # path/to/client/certificate'
-        'client_key_path': ""  # path/to/key'
-    }
+        'ca_path': '',  # 'path/to/ca'
+        'client_certificate_path': '',  # path/to/client/certificate'
+        'client_key_path': '',  # path/to/key'
+    },
 }
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     http_client = PyClient.get_http_client(config=_SAMPLE_CONFIG)
-    http_client.do_get(path="/get")
-    asyncio.run(http_client.do_get_async(path="/get"))
+    http_client.do_get(path='/get')
+    asyncio.run(http_client.do_get_async(path='/get'))

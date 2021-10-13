@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Union, Dict
+from typing import Dict, Union
 
 import requests
 import ujson
@@ -53,8 +53,10 @@ class PyClient:
         headers.update(ua)
         return headers
 
-    def _request(self, url: str, method: str,
-                 **kwargs: dict) -> requests.Response:
+    def _request(
+        self, url: str, method: str,
+        **kwargs: dict
+    ) -> requests.Response:
         return self._session.request(
             method=method,
             url=url,
@@ -66,8 +68,10 @@ class PyClient:
     def request(self, path: str, method='GET', **kwargs) -> requests.Response:
         return self._request(url=self._host + path, method=method, **kwargs)
 
-    async def request_async(self, path: str, method='GET',
-                            **kwargs) -> requests.Response:
+    async def request_async(
+        self, path: str, method='GET',
+        **kwargs
+    ) -> requests.Response:
         return self._request(url=self._host + path, method=method, **kwargs)
 
     def do_get(self, path: str, **kwargs) -> requests.Response:
