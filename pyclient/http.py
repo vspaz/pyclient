@@ -1,10 +1,12 @@
 from __future__ import annotations
 
-from typing import Union, Dict, Tuple
+from typing import Union, Dict
 
 import requests
 import ujson
 from urllib3.util.retry import Retry
+
+from .__version__ import __version__
 
 requests.models.complexjson = ujson
 
@@ -43,7 +45,15 @@ class PyClient:
             ),
         )
 
-    def _request(self, url: str, method: str, **kwargs: dict) -> requests.Response:
+    @staticmethod
+    def _add_headers(**kwargs) -> dict:
+        headers = kwargs.pop('headers', {})
+        ua = {'user-agent': f'pyclient/{__version__}'}
+        headers.update(ua)
+        return headers
+
+    def _request(self, url: str, method: str,
+                 **kwargs: dict) -> requests.Response:
         return self._session.request(
             method=method,
             url=url,
