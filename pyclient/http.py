@@ -66,6 +66,9 @@ class PyClient:
     def request(self, path: str, method='GET', **kwargs) -> requests.Response:
         return self._request(url=self._host + path, method=method, **kwargs)
 
+    async def request_async(self, path: str, method='GET', **kwargs) -> requests.Response:
+        return self._request(url=self._host + path, method=method, **kwargs)
+
     def do_get(self, path: str, **kwargs) -> requests.Response:
         return self.request(path=path, **kwargs)
 
