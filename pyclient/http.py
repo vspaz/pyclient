@@ -84,6 +84,9 @@ class PyClient:
     def do_patch(self, path: str, **kwargs) -> requests.Response:
         return self.request(url=path, method='PATCH', **kwargs)
 
+    async def do_path_async(self, path: str, **kwargs) -> requests.Response:
+        await self.request_async(path=path, method='PATCH', **kwargs)
+
     def do_delete(self, path: str, **kwargs) -> requests.Response:
         return self.request(url=path, method='DELETE', **kwargs)
 
