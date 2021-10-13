@@ -75,6 +75,12 @@ class PyClient:
     def do_patch(self, path: str, **kwargs) -> requests.Response:
         return self._request(url=path, method='PATCH', **kwargs)
 
+    def do_delete(self, path: str, **kwargs) -> requests.Response:
+        return self._request(url=path, method='DELETE', **kwargs)
+
+    def do_put(self, path: str, **kwargs) -> requests.Response:
+        return self._request(url=path, method='PUT', **kwargs)
+
     @staticmethod
     def _validate_config(config: Dict[str, dict]) -> dict:
         # TODO: add config validation.
