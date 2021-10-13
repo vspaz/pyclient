@@ -48,7 +48,7 @@ class PyClient:
     @staticmethod
     def _add_headers(**kwargs) -> dict:
         headers = kwargs.pop('headers', {})
-        ua = {'user-agent': f'pyclient/{__version__}'}
+        ua = {'user-agent': f'PyClient/{__version__}'}
         headers.update(ua)
         return headers
 
@@ -58,6 +58,7 @@ class PyClient:
             method=method,
             url=url,
             timeout=kwargs.get('timeouts', self._timeouts),
+            headers=self._add_headers(**kwargs),
             **kwargs,
         )
 
