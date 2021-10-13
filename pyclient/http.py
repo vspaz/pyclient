@@ -69,6 +69,9 @@ class PyClient:
     def do_get(self, path: str, **kwargs) -> requests.Response:
         return self.request(path=path, **kwargs)
 
+    def do_post(self, path: str, **kwargs) -> requests.Response:
+        return self._request(url=path, method='POST', **kwargs)
+
     @staticmethod
     def _validate_config(config: Dict[str, dict]) -> dict:
         # TODO: add config validation.
