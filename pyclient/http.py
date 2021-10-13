@@ -64,7 +64,10 @@ class PyClient:
         )
 
     def request(self, path: str, method='GET', **kwargs) -> requests.Response:
-        return self._request(url=f'{self._host}{path}', method=method, **kwargs)
+        return self._request(url=self._host + path, method=method, **kwargs)
+
+    def do_get(self, path: str, **kwargs) -> requests.Response:
+        return self.request(path=path, **kwargs)
 
     @staticmethod
     def _validate_config(config: Dict[str, dict]) -> dict:
