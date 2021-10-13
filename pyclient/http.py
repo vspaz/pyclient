@@ -17,7 +17,7 @@ class PyClient:
         self._session: requests.Session = requests.Session()
         http_config: dict = config['http']
         port: Union[str, int] = str(http_config.get('port', ''))
-        self._host = f"{http_config['host']}" + f":{port}/" if port else '/'
+        self._host = f"{http_config['host']}" + (f":{port}" if port else '')
 
         self._session.mount(
             prefix=self._host,
@@ -68,12 +68,12 @@ class PyClient:
 
     async def request_async(self, path: str, method='GET',
                             **kwargs) -> requests.Response:
-        return self.request(path=path, method=method, **kwargs)
+        return self._request(url=self._host + path, method=method, **kwargs)
 
     def do_get(self, path: str, **kwargs) -> requests.Response:
         return self.request(path=path, **kwargs)
 
-    def do_get_async(self, path: str, **kwargs) -> requests.Response:
+    async def do_get_async(self, path: str, **kwargs) -> requests.Response:
         return await self.request_async(path=path, method='GET', **kwargs)
 
     def do_post(self, path: str, **kwargs) -> requests.Response:
