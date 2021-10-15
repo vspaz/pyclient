@@ -1,4 +1,4 @@
-# pclient
+# pyclient
 
 configurable HTTP python client that supports
 
