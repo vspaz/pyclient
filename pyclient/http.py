@@ -66,41 +66,20 @@ class PyClient:
     def request(self, path: str, method='GET', **kwargs) -> requests.Response:
         return self._request(url=self._host + path, method=method, **kwargs)
 
-    async def request_async(
-        self, path: str, method='GET',
-        **kwargs
-    ) -> requests.Response:
-        return self._request(url=self._host + path, method=method, **kwargs)
-
     def do_get(self, path: str, **kwargs) -> requests.Response:
         return self.request(path=path, **kwargs)
-
-    async def do_get_async(self, path: str, **kwargs) -> requests.Response:
-        return await self.request_async(path=path, method='GET', **kwargs)
 
     def do_post(self, path: str, **kwargs) -> requests.Response:
         return self.request(url=path, method='POST', **kwargs)
 
-    async def do_post_async(self, path: str, **kwargs) -> requests.Response:
-        return await self.request_async(path=path, method='POST', **kwargs)
-
     def do_patch(self, path: str, **kwargs) -> requests.Response:
         return self.request(url=path, method='PATCH', **kwargs)
-
-    async def do_path_async(self, path: str, **kwargs) -> requests.Response:
-        return await self.request_async(path=path, method='PATCH', **kwargs)
 
     def do_delete(self, path: str, **kwargs) -> requests.Response:
         return self.request(url=path, method='DELETE', **kwargs)
 
-    async def do_delete_async(self, path: str, **kwargs) -> requests.Response:
-        return await self.request_async(path=path, method='DELETE', **kwargs)
-
     def do_put(self, path: str, **kwargs) -> requests.Response:
         return self.request(url=path, method='PUT', **kwargs)
-
-    async def do_put_async(self, path: str, **kwargs) -> requests.Response:
-        return await self.request_async(path=path, method='PUT', **kwargs)
 
     @staticmethod
     def _validate_config(config: Dict[str, dict]) -> dict:

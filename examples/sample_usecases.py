@@ -1,5 +1,3 @@
-import asyncio
-
 from pyclient.http import PyClient
 
 _SAMPLE_CONFIG = {
@@ -30,4 +28,3 @@ _SAMPLE_CONFIG = {
 if __name__ == '__main__':
     http_client = PyClient.get_http_client(config=_SAMPLE_CONFIG)
     http_client.do_get(path='/get')
-    asyncio.run(http_client.do_get_async(path='/get'))
