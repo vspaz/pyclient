@@ -34,12 +34,13 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['tests', 'requirements']),
     install_requires=_get_dependencies(),
     url=_PACKAGE_INFO['url'],
-    license='',
+    license='MIT License',
     author=_PACKAGE_INFO['author'],
     author_email=_PACKAGE_INFO['email'],
     maintainer=_PACKAGE_INFO['maintainer'],
     classifiers=[
         'Programming Language :: Python :: 3'
+        'Programming Language :: Python :: 3.7'
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
