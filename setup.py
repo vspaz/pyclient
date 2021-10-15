@@ -3,8 +3,8 @@ import os
 import setuptools
 
 
-def _build_path(file_path, base_path=os.path.abspath(os.path.dirname(__file__))):
-    return os.path.join(base_path, file_path)
+def _build_path(file_path, base=os.path.abspath(os.path.dirname(__file__))):
+    return os.path.join(base, file_path)
 
 
 def _get_dependencies():
