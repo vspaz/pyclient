@@ -15,7 +15,6 @@ sample config
 ```python
 from pyclient.http import PyClient
 
-
 config = {
     'http': {
         'host': 'https://example.com',  # required
@@ -29,7 +28,8 @@ config = {
         'retries': {
             'attempts': 3,
             'backoff': 0.5,
-            'on_errors': ['500', '502', '504', '429'],   # optional, errors to retry on
+            'on_errors': [500, 502, 504, 429],
+            # optional, errors to retry on
         },
     },
     # optional

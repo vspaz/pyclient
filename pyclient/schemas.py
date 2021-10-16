@@ -26,9 +26,27 @@ _TIMEOUTS = {
             'type': 'number',
         },
         'read': {
-            'type', 'number',
+            'type': 'number',
         },
-    }
+    },
+}
+
+_RETRIES = {
+    'type': 'object',
+    'properties': {
+        'attempts': {
+            'type': 'integer',
+        },
+        'backoff': {
+            'type': 'number',
+        },
+        'on_errors': {
+            'type': 'array',
+            'items': {
+                'type': 'integer',
+            },
+        },
+    },
 }
 
 _HTTP = {
@@ -38,12 +56,13 @@ _HTTP = {
             'type': 'string',
         },
         'port': {
-            'type': ['number', 'string', ]
+            'type': ['number', 'string'],
         },
         'timeouts': _TIMEOUTS,
+        'retries': _RETRIES,
     },
-    'required': ['host', ],
-    'additionalProperties': False
+    'required': ['host'],
+    'additionalProperties': False,
 }
 
 _BASIC_AUTH = {
@@ -55,7 +74,7 @@ _BASIC_AUTH = {
         'password': {
             'type': 'string',
         },
-    }
+    },
 }
 
 _TLS = {
@@ -70,7 +89,7 @@ _TLS = {
         'client_key_path': {
             'type': 'string',
         },
-    }
+    },
 }
 
 CONFIG_SCHEMA = {
@@ -80,6 +99,6 @@ CONFIG_SCHEMA = {
         'basic_auth': _BASIC_AUTH,
         'tls': _TLS,
     },
-    'required': ['http', ],
+    'required': ['http'],
     'additionalProperties': False,
 }

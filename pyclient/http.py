@@ -6,6 +6,7 @@ import requests
 import ujson
 from urllib3.util.retry import Retry
 
+from . import schemas
 from .__version__ import __version__
 
 requests.models.complexjson = ujson
@@ -53,8 +54,8 @@ class PyClient:
         return headers
 
     def _request(
-        self, url: str, method: str,
-        **kwargs: dict
+            self, url: str, method: str,
+            **kwargs: dict
     ) -> requests.Response:
         return self._session.request(
             method=method,
@@ -83,11 +84,6 @@ class PyClient:
         return self.request(url=path, method='PUT', **kwargs)
 
     @staticmethod
-    def _validate_config(config: Dict[str, dict]) -> dict:
-        # TODO: add config validation.
-        pass
-
-    @staticmethod
-    def get_http_client(config: Dict[str, dict]) -> PyClient:
-        PyClient._validate_config(config=config)
+    @schemas.validate_config(schema=schemas.CONFIG_SCHEMA)
+    def get_http_client(config: dict) -> PyClient:
         return PyClient(config=config)

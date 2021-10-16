@@ -11,7 +11,7 @@ _SAMPLE_CONFIG = {
         'retries': {
             'attempts': 3,
             'backoff': 0.5,
-            'on_errors': ['500', '502', '504', '429'],
+            'on_errors': [500, 502, 504, 429],
         },
     },
     'basic_auth': {
