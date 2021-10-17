@@ -4,6 +4,12 @@ from pyclient.http import PyClient
 from .mocked_responses import mocked_http_calls
 
 
+def assert_response(resp):
+    assert resp.text == "{'status': 'accepted'}"
+    assert resp.status_code == 202
+    assert resp.json() == {'status': 'accepted'}
+
+
 def test_client_init_ok():
     _ = PyClient.get_http_client(
         config={
