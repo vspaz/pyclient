@@ -1,15 +1,18 @@
 from unittest import mock
 
 
-def mocked_http_calls(*args, **kwargs):
-    response = {"foo": "bar"}
-    response_stub = mock.Mock(
-        **{
-            'json.return_value': response,
-            'text': str(response),
+def _response_factory(path: str):
+    path_to_response = {
+        '/get': {
+            'json.return_value': {"foo": "bar"},
+            'text': str({"foo": "bar"}),
             'status_code': 200,
-        }
-    )
+        },
+    }
+    mocked_response = path_to_response.get(path)
+    assert mocked_response, 'response not yet defined'
+    return mock.Mock(**mocked_response)
 
-    if args[0] == '/foo':
-        return response_stub
+
+def mocked_http_calls(*args, **kwargs):
+    return _response_factory(path=args[0])

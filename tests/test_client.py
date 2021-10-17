@@ -24,7 +24,7 @@ def test_do_get_ok(mock_do_get):
             },
         },
     )
-    resp = http_client.do_get("/foo")
+    resp = http_client.do_get("/get")
     assert resp.text == "{'foo': 'bar'}"
     assert resp.status_code == 200
     assert resp.json() == {"foo": "bar"}
