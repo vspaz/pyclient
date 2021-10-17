@@ -30,7 +30,7 @@ def test_do_get_ok(mock_do_get):
 
 
 @mock.patch('pyclient.http.PyClient.do_post', side_effect=mocked_http_calls)
-def test_do_post_ok(mock_do_get):
+def test_do_post_ok(mock_do_post):
     http_client = PyClient.get_http_client(
         config={
             'http': {
