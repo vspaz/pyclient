@@ -45,9 +45,7 @@ def test_do_post_ok(mock_do_post):
         },
     )
     resp = http_client.do_post('/post', json={'foo', 'bar'})
-    assert resp.text == "{'status': 'accepted'}"
-    assert resp.status_code == 202
-    assert resp.json() == {'status': 'accepted'}
+    assert_response(resp=resp)
 
 
 @mock.patch('pyclient.http.PyClient.do_patch', side_effect=mocked_http_calls)
@@ -60,6 +58,4 @@ def test_do_patch_ok(mock_do_patch):
         },
     )
     resp = http_client.do_patch('/patch', json={'foo': 'bar'})
-    assert resp.text == "{'status': 'accepted'}"
-    assert resp.status_code == 202
-    assert resp.json() == {'status': 'accepted'}
+    assert_response(resp=resp)
