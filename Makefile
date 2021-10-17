@@ -4,7 +4,7 @@ isort:
 	  isort .
 
 test:
-	  python3 pytest
+	  python3 -m pytest . -v
 
 flake8:
 	  python3 -m flake8 .
