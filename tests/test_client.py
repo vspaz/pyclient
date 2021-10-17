@@ -53,7 +53,7 @@ def test_do_patch_ok(mock_do_patch):
             },
         },
     )
-    resp = http_client.do_post('/patch', json={'foo', 'bar'})
+    resp = http_client.do_patch('/patch', json={'foo': 'bar'})
     assert resp.text == "{'status': 'accepted'}"
     assert resp.status_code == 202
     assert resp.json() == {'status': 'accepted'}
