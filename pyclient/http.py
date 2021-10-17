@@ -1,5 +1,4 @@
 from __future__ import annotations
-
 from typing import Dict, Union
 
 import requests
@@ -13,7 +12,7 @@ requests.models.complexjson = ujson
 
 
 class PyClient:
-    def __init__(self, config: Dict[str, dict]) -> None:
+    def __init__(self, config: dict) -> None:
         self._session: requests.Session = requests.Session()
         http_config: dict = config['http']
         port: Union[str, int] = str(http_config.get('port', ''))

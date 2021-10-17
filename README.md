@@ -2,10 +2,10 @@
 
 configurable HTTP python client that supports
 
-- retries on errors,
-- timeouts,
 - tls,
 - basic auth,
+- retries on specific errors,
+- timeouts,
 - logging
 - uses ultra-fast 'ujson' library for serialization'
 - etc.
@@ -28,11 +28,11 @@ config = {
         'retries': {
             'attempts': 3,
             'backoff': 0.5,
-            'on_errors': [500, 502, 504, 429],
+            'on_errors': [500, 502, 504, 429,],
             # optional, errors to retry on
         },
     },
-    # optional
+    # optional section
     'basic_auth': {
         'user': 'user',
         'password': 'password',
@@ -46,6 +46,5 @@ config = {
 }
 
 http_client = PyClient.get_http_client(config=config)
-http_client.do_get(path='/movies')  # -> https://example.com/movies
-
+resp = http_client.do_get(path='/movies')  # -> https://example.com/movies
 ```
