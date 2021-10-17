@@ -72,16 +72,16 @@ class PyClient:
         return self.request(path=path, **kwargs)
 
     def do_post(self, path: str, **kwargs) -> requests.Response:
-        return self.request(url=path, method='POST', **kwargs)
+        return self.request(path=path, method='POST', **kwargs)
 
     def do_patch(self, path: str, **kwargs) -> requests.Response:
-        return self.request(url=path, method='PATCH', **kwargs)
+        return self.request(path=path, method='PATCH', **kwargs)
 
     def do_delete(self, path: str, **kwargs) -> requests.Response:
-        return self.request(url=path, method='DELETE', **kwargs)
+        return self.request(path=path, method='DELETE', **kwargs)
 
     def do_put(self, path: str, **kwargs) -> requests.Response:
-        return self.request(url=path, method='PUT', **kwargs)
+        return self.request(path=path, method='PUT', **kwargs)
 
     @staticmethod
     @schemas.validate_config(schema=schemas.CONFIG_SCHEMA)

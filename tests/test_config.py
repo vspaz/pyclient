@@ -34,7 +34,7 @@ def test_extra_fields_fail():
     config = {
         'http': {
             'host': 'http: // example.com',
-            'some_extra_field': "extra field value",
+            'some_extra_field': 'extra field value',
         },
     }
 

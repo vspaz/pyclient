@@ -4,18 +4,18 @@ from unittest import mock
 def _response_factory(path: str):
     path_to_response = {
         '/get': {
-            'json.return_value': {"foo": "bar"},
-            'text': str({"foo": "bar"}),
+            'json.return_value': {'foo': 'bar'},
+            'text': str({'foo': 'bar'}),
             'status_code': 200,
         },
         '/post': {
-            'json.return_value': {"status": "accepted"},
-            'text': str({"status": "accepted"}),
+            'json.return_value': {'status': 'accepted'},
+            'text': str({'status': 'accepted'}),
             'status_code': 202,
         },
         '/patch': {
-            'json.return_value': {"status": "accepted"},
-            'text': str({"status": "accepted"}),
+            'json.return_value': {'status': 'accepted'},
+            'text': str({'status': 'accepted'}),
             'status_code': 202,
         },
     }
