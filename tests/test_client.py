@@ -1,7 +1,6 @@
 from unittest import mock
 
 from pyclient.http import PyClient
-
 from .mocked_responses import mocked_http_calls
 
 
@@ -59,4 +58,17 @@ def test_do_patch_ok(mock_do_patch):
         },
     )
     resp = http_client.do_patch('/patch', json={'foo': 'bar'})
+    assert_response(resp=resp)
+
+
+@mock.patch('pyclient.http.PyClient.do_put', side_effect=mocked_http_calls)
+def test_do_put_ok(mock_do_put):
+    http_client = PyClient.get_http_client(
+        config={
+            'http': {
+                'host': 'http://example.com',
+            },
+        },
+    )
+    resp = http_client.do_put('/put', json={'foo': 'bar'})
     assert_response(resp=resp)
