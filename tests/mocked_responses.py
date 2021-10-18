@@ -18,6 +18,12 @@ def _response_factory(path: str):
             'text': str({'status': 'accepted'}),
             'status_code': 202,
         },
+        '/put': {
+            'json.return_value': {'status': 'accepted'},
+            'text': str({'status': 'accepted'}),
+            'status_code': 202,
+        },
+
     }
     mocked_response = path_to_response.get(path)
     assert mocked_response, 'response not yet defined'

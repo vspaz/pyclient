@@ -28,7 +28,7 @@ config = {
         'retries': {
             'attempts': 3,
             'backoff': 0.5,
-            'on_errors': [500, 502, 504, 429,],
+            'on_errors': [500, 502, 504, 429, ],
             # optional, errors to retry on
         },
     },
