@@ -72,3 +72,16 @@ def test_do_put_ok(mock_do_put):
     )
     resp = http_client.do_put('/put', json={'foo': 'bar'})
     assert_response(resp=resp)
+
+
+@mock.patch('pyclient.http.PyClient.do_delete', side_effect=mocked_http_calls)
+def test_do_delete_ok(mock_do_delete):
+    http_client = PyClient.get_http_client(
+        config={
+            'http': {
+                'host': 'http://example.com',
+            },
+        },
+    )
+    resp = http_client.do_delete('/delete', json={'foo': 'bar'})
+    assert_response(resp=resp)
