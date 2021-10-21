@@ -1,16 +1,8 @@
 import functools
 import logging
-import sys
 
 import requests
 import ujson
-
-logging.basicConfig(
-    stream=sys.stderr,
-    level=logging.INFO,
-    format='%(asctime)s.%(msecs)03d %(levelname)s: %(message)s',
-    datefmt='%Y-%m-%d %X',
-)
 
 
 def log_request(func):

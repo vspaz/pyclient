@@ -8,6 +8,7 @@ from urllib3.util.retry import Retry
 
 from . import schemas
 from .__version__ import __version__
+from .logger import log_request
 
 requests.models.complexjson = ujson
 
@@ -53,6 +54,7 @@ class PyClient:
         headers.update(ua)
         return headers
 
+    @log_request
     def _request(
             self, url: str, method: str,
             **kwargs: dict
