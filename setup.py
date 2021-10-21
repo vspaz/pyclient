@@ -19,25 +19,26 @@ def _get_readme():
 
 def _get_package_info():
     with open(_build_path(file_path='pyclient/__version__.py')) as fh:
-        package_info = dict()
+        package_info = {}
         exec(fh.read(), package_info)
         return package_info
 
 
 _PACKAGE_INFO = _get_package_info()
 
+
 setuptools.setup(
-    name=_PACKAGE_INFO['title'],
-    version=_PACKAGE_INFO['version'],
-    description=_PACKAGE_INFO['description'],
+    name=_PACKAGE_INFO['__title__'],
+    version=_PACKAGE_INFO['__version__'],
+    description=_PACKAGE_INFO['__description__'],
     long_description=_get_readme(),
     packages=setuptools.find_packages(exclude=['tests', 'requirements']),
     install_requires=_get_dependencies(),
-    url=_PACKAGE_INFO['url'],
+    url=_PACKAGE_INFO['__url__'],
     license='MIT License',
-    author=_PACKAGE_INFO['author'],
-    author_email=_PACKAGE_INFO['email'],
-    maintainer=_PACKAGE_INFO['maintainer'],
+    author=_PACKAGE_INFO['__author__'],
+    author_email=_PACKAGE_INFO['__email__'],
+    maintainer=_PACKAGE_INFO['__maintainer__'],
     classifiers=[
         'Programming Language :: Python :: 3'
         'Programming Language :: Python :: 3.7'
