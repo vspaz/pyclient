@@ -85,6 +85,9 @@ class PyClient:
     def do_put(self, path: str, **kwargs) -> requests.Response:
         return self.request(path=path, method='PUT', **kwargs)
 
+    def do_head(self, path: str, **kwargs) -> requests.Response:
+        return self.request(path=path, method='HEAD', **kwargs)
+
     @staticmethod
     @schemas.validate_config(schema=schemas.CONFIG_SCHEMA)
     def get_http_client(config: dict) -> PyClient:
