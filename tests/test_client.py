@@ -86,3 +86,12 @@ def test_do_delete_ok(mock_do_delete):
     )
     resp = http_client.do_delete('/delete', json={'foo': 'bar'})
     assert_response(resp=resp)
+
+
+@mock.patch('pyclient.http.PyClient.do_get', side_effect=mocked_http_calls)
+def test_unconfigured_client_do_get(mock_do_get):
+    http_client = PyClient.get_http_client()
+    resp = http_client.do_get('http://example.com/get')
+    assert resp.text == "{'foo': 'bar'}"
+    assert resp.status_code == 200
+    assert resp.json() == {'foo': 'bar'}

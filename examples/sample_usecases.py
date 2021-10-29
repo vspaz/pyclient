@@ -29,7 +29,6 @@ if __name__ == '__main__':
     http_client = PyClient.get_http_client(config=_SAMPLE_CONFIG)
     print(http_client.do_get(path='/get').json())
 
-    # or
-
+    # or w/o config
     http_client = PyClient.get_http_client()
     print(http_client.do_get(path='https://httpbin.org/get').json())

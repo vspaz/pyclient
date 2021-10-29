@@ -13,6 +13,11 @@ def _response_factory(path: str):
             'text': str({'foo': 'bar'}),
             'status_code': 200,
         },
+        'http://example.com/get': {
+            'json.return_value': {'foo': 'bar'},
+            'text': str({'foo': 'bar'}),
+            'status_code': 200,
+        },
         '/post': common_mock_response,
         '/patch': common_mock_response,
         '/put': common_mock_response,
