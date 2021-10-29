@@ -16,6 +16,7 @@ requests.models.complexjson = ujson
 class PyClient:
     def __init__(self, config: dict) -> None:
         self._session: requests.Session = requests.Session()
+        config: dict = config or {}
         http_config: dict = config.get('http', {})
         port: Union[str, int] = str(http_config.get('port', ''))
         self._host = f"{http_config.get('host', '')}{':' + port if port else ''}"
@@ -90,5 +91,5 @@ class PyClient:
 
     @staticmethod
     @schemas.validate_config(schema=schemas.CONFIG_SCHEMA)
-    def get_http_client(config: dict) -> PyClient:
+    def get_http_client(config=None) -> PyClient:
         return PyClient(config=config)
