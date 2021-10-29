@@ -16,11 +16,12 @@ requests.models.complexjson = ujson
 class PyClient:
     def __init__(self, config: dict) -> None:
         self._session: requests.Session = requests.Session()
-        http_config: dict = config['http']
-        self._host = f"{http_config['host']}" + str(http_config.get('port', ''))
+        http_config: dict = config.get('http', {})
+        port: Union[str, int] = str(http_config.get('port', ''))
+        self._host = f"{http_config.get('host', '')}{':' + port if port else ''}"
 
         self._session.mount(
-            prefix=self._host,
+            prefix=self._host or 'https://',
             adapter=self._retry_on(config=http_config.get('retries', {})),
         )
         tls_certificates: dict = config.get('tls', {})

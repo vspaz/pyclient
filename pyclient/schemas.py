@@ -11,7 +11,7 @@ def validate_config(schema):
     def _wrapper(func):
         @functools.wraps(func)
         def __wrapper(*args, **kwargs):
-            _validate_config(config=kwargs['config'], schema=schema)
+            _validate_config(config=kwargs.get('config', {}), schema=schema)
             return func(*args, **kwargs)
 
         return __wrapper
@@ -61,9 +61,9 @@ _HTTP = {
         'timeouts': _TIMEOUTS,
         'retries': _RETRIES,
     },
-    'required': ['host'],
     'additionalProperties': False,
 }
+
 
 _BASIC_AUTH = {
     'type': 'object',
@@ -99,6 +99,5 @@ CONFIG_SCHEMA = {
         'basic_auth': _BASIC_AUTH,
         'tls': _TLS,
     },
-    'required': ['http'],
     'additionalProperties': False,
 }

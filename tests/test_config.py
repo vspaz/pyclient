@@ -14,26 +14,24 @@ def test_host_present_ok():
     schemas._validate_config(config=config, schema=schemas.CONFIG_SCHEMA)
 
 
-def test_host_missing_fail():
+def test_host_missing_ok():
     config = {
         'http': {
 
         },
     }
 
-    with pytest.raises(jsonschema.ValidationError):
-        schemas._validate_config(config=config, schema=schemas.CONFIG_SCHEMA)
+    schemas._validate_config(config=config, schema=schemas.CONFIG_SCHEMA)
 
 
-def test_empty_config_fail():
-    with pytest.raises(jsonschema.ValidationError):
-        schemas._validate_config(config=dict(), schema=schemas.CONFIG_SCHEMA)
+def test_empty_config_ok():
+    schemas._validate_config(config=dict(), schema=schemas.CONFIG_SCHEMA)
 
 
 def test_extra_fields_fail():
     config = {
         'http': {
-            'host': 'http: // example.com',
+            'host': 'http://example.com',
             'some_extra_field': 'extra field value',
         },
     }
