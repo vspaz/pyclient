@@ -27,4 +27,9 @@ _SAMPLE_CONFIG = {
 
 if __name__ == '__main__':
     http_client = PyClient.get_http_client(config=_SAMPLE_CONFIG)
-    http_client.do_get(path='/get')
+    print(http_client.do_get(path='/get').json())
+
+    # or
+
+    http_client = PyClient.get_http_client()
+    print(http_client.do_get(path='https://httpbin.org/get').json())

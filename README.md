@@ -10,34 +10,30 @@ configurable HTTP python client that supports
 - uses ultra-fast 'ujson' library for serialization'
 - etc.
 
-sample config
+the config is optional.
+below is the config sample:
 
 ```python
 from pyclient.http import PyClient
 
 config = {
     'http': {
-        'host': 'https://example.com',  # optional
-        'port': '',  # optional <int|str>
-        # optional section
+        'host': 'https://httpbin.org',
+        'port': '',  # <int|str>
         'timeouts': {
             'read': 5,
             'connect': 5,
         },
-        # optional section
         'retries': {
             'attempts': 3,
             'backoff': 0.5,
             'on_errors': [500, 502, 504, 429, ],
-            # optional, errors to retry on
         },
     },
-    # optional section
     'basic_auth': {
         'user': 'user',
         'password': 'password',
     },
-    # optional section
     'tls': {
         'ca_path': 'path/to/ca',
         'client_certificate_path': 'path/to/client/certificate',
@@ -46,16 +42,14 @@ config = {
 }
 
 http_client = PyClient.get_http_client(config=config)
-resp = http_client.do_get(path='/movies')  # -> https://example.com/movies
+resp = http_client.do_get(path='/get')  # -> https://httpbin.org/get
 
 ```
-
-you don't have to configure the client and can use it with default parameters as
-
+w/o config
 ```python
 from pyclient.http import PyClient
 
 
 http_client = PyClient.get_http_client()
-http_client.do_get(path="https://httpbin.org/get")
+resp = http_client.do_get(path="https://httpbin.org/get")
 ```
