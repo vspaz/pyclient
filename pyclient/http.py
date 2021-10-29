@@ -17,8 +17,7 @@ class PyClient:
     def __init__(self, config: dict) -> None:
         self._session: requests.Session = requests.Session()
         http_config: dict = config['http']
-        port: Union[str, int] = str(http_config.get('port', ''))
-        self._host = f"{http_config['host']}" + (f":{port}" if port else '')
+        self._host = f"{http_config['host']}" + str(http_config.get('port', ''))
 
         self._session.mount(
             prefix=self._host,
