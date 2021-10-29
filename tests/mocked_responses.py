@@ -7,17 +7,16 @@ def _response_factory(path: str):
         'text': str({'status': 'accepted'}),
         'status_code': 202,
     }
+
+    get_response = {
+        'json.return_value': {'foo': 'bar'},
+        'text': str({'foo': 'bar'}),
+        'status_code': 200,
+    }
+
     path_to_response = {
-        '/get': {
-            'json.return_value': {'foo': 'bar'},
-            'text': str({'foo': 'bar'}),
-            'status_code': 200,
-        },
-        'http://example.com/get': {
-            'json.return_value': {'foo': 'bar'},
-            'text': str({'foo': 'bar'}),
-            'status_code': 200,
-        },
+        '/get': get_response,
+        'http://example.com/get': get_response,
         '/post': common_mock_response,
         '/patch': common_mock_response,
         '/put': common_mock_response,
