@@ -17,7 +17,7 @@ from pyclient.http import PyClient
 
 config = {
     'http': {
-        'host': 'https://example.com',  # required
+        'host': 'https://example.com',  # optional
         'port': '',  # optional <int|str>
         # optional section
         'timeouts': {
@@ -47,4 +47,15 @@ config = {
 
 http_client = PyClient.get_http_client(config=config)
 resp = http_client.do_get(path='/movies')  # -> https://example.com/movies
+
+```
+
+you don't have to configure the client and can use it with default parameters as
+
+```python
+from pyclient.http import PyClient
+
+
+http_client = PyClient.get_http_client()
+http_client.do_get(path="https://httpbin.org/get")
 ```
