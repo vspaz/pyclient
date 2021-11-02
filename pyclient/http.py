@@ -68,6 +68,10 @@ class PyClient:
             **kwargs,
         )
 
+    def set_tls(self, client_certificate_path, client_key_path, ca_path=None):
+        self._session.verify = ca_path
+        self._session.cert = (client_certificate_path, client_key_path)
+
     def request(self, path: str, method='GET', **kwargs) -> requests.Response:
         return self._request(url=self._host + path, method=method, **kwargs)
 
