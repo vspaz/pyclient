@@ -11,11 +11,12 @@ requests.models.complexjson = ujson
 
 
 class PyClient:
-    def __init__(self, host="", port="") -> None:
+    def __init__(self, host='', port='') -> None:
         self._session: requests.Session = requests.Session()
         self._host = f"{host}{':' + port if port else ''}"
         self._timeouts = (5, 5)
         self.set_retries()
+        self.set_user_agent()
 
     @log_request
     def _request(
@@ -80,5 +81,5 @@ class PyClient:
         self._timeouts: tuple = (connect, read)
 
     @staticmethod
-    def get_http_client(host="", port="") -> PyClient:
+    def get_http_client(host='', port='') -> PyClient:
         return PyClient(host=host, port=port)

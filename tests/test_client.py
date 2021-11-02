@@ -1,6 +1,7 @@
 from unittest import mock
 
 from pyclient.http import PyClient
+
 from .mocked_responses import mocked_http_calls
 
 
