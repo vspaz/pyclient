@@ -10,46 +10,25 @@ configurable HTTP python client that supports
 - uses ultra-fast 'ujson' library for serialization'
 - etc.
 
-the config is optional.
-below is the config sample:
-
 ```python
 from pyclient.http import PyClient
 
-config = {
-    'http': {
-        'host': 'https://httpbin.org',
-        'port': '',  # <int|str>
-        'timeouts': {
-            'read': 5,
-            'connect': 5,
-        },
-        'retries': {
-            'attempts': 3,
-            'backoff': 0.5,
-            'on_errors': [500, 502, 504, 429, ],
-        },
-    },
-    'basic_auth': {
-        'user': 'user',
-        'password': 'password',
-    },
-    'tls': {
-        'ca_path': 'path/to/ca',
-        'client_certificate_path': 'path/to/client/certificate',
-        'client_key_path': 'path/to/key',
-    }
-}
+if __name__ == '__main__':
+    http_client = PyClient.get_http_client(host='https://httpbin.org')
+    http_client.set_retries(count=3, backoff=1.5, on_errors=[500, 502, 504, 429])
+    http_client.set_timeouts(connect=5, read=5)
+    http_client.set_user_agent(ua='myClient')
+    http_client.set_basic_auth(user='user', password='password')
+    # http_client.set_tls(
+    #     client_key_path='path/to/key',
+    #     client_certificate_path='path/to/client/certificate',
+    #     ca_path='path/to/ca',
+    # )
+    print(http_client.do_get(path='/get').json())
 
-http_client = PyClient.get_http_client(config=config)
-resp = http_client.do_get(path='/get')  # -> https://httpbin.org/get
+    # or simply
+    http_client = PyClient.get_http_client()
+    print(http_client.do_get(path='https://httpbin.org/get').json())
 
 ```
-w/o config
-```python
-from pyclient.http import PyClient
 
-
-http_client = PyClient.get_http_client()
-resp = http_client.do_get(path="https://httpbin.org/get")
-```
