@@ -39,16 +39,6 @@ class PyClient:
         )
 
     @staticmethod
-    def _retry_on(config: dict) -> requests.adapters.HTTPAdapter:
-        return requests.adapters.HTTPAdapter(
-            max_retries=Retry(
-                total=config.get('retries', 3),
-                backoff_factor=config.get('backoff', 0.5),
-                status_forcelist=config.get('on_errors', []),
-            ),
-        )
-
-    @staticmethod
     def _add_headers(**kwargs) -> dict:
         headers = kwargs.pop('headers', {})
         ua = {'user-agent': f'PyClient/{__version__}'}
@@ -67,10 +57,6 @@ class PyClient:
             headers=self._add_headers(**kwargs),
             **kwargs,
         )
-
-    def set_tls(self, client_certificate_path, client_key_path, ca_path=None):
-        self._session.verify = ca_path
-        self._session.cert = (client_certificate_path, client_key_path)
 
     def request(self, path: str, method='GET', **kwargs) -> requests.Response:
         return self._request(url=self._host + path, method=method, **kwargs)
@@ -92,6 +78,29 @@ class PyClient:
 
     def do_head(self, path: str, **kwargs) -> requests.Response:
         return self.request(path=path, method='HEAD', **kwargs)
+
+    def set_tls(self, client_certificate_path, client_key_path, ca_path=None):
+        self._session.verify = ca_path
+        self._session.cert = (client_certificate_path, client_key_path)
+
+    def set_basic_auth(self, user, password):
+        self._session.auth = (user, password)
+
+    @staticmethod
+    def _retry_on(count, backoff, on_errors) -> requests.adapters.HTTPAdapter:
+        return requests.adapters.HTTPAdapter(
+            max_retries=Retry(
+                total=count,
+                backoff_factor=backoff,
+                status_forcelist=on_errors or [],
+            ),
+        )
+
+    def set_retries(self, count=0, backoff=0, on_errors=None):
+        self._session.mount(
+            prefix=self._host or 'https://',
+            adapter=self._retry_on(count=count, backoff=backoff, on_errors=on_errors),
+        )
 
     @staticmethod
     @schemas.validate_config(schema=schemas.CONFIG_SCHEMA)
