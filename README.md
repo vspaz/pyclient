@@ -31,4 +31,3 @@ if __name__ == '__main__':
     print(http_client.do_get(path='https://httpbin.org/get').json())
 
 ```
-
