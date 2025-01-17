@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Union
 
 import requests
@@ -23,7 +21,7 @@ class PyClient:
     @log_request
     def _request(
             self, url: str, method: str,
-            **kwargs: dict
+            **kwargs: dict,
     ) -> requests.Response:
         return self._session.request(
             method=method,
