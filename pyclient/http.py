@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Union
 
 import requests
@@ -14,7 +16,7 @@ class PyClient:
     def __init__(self, host: str = "", port: Union[str, int] = "") -> None:
         self._session: requests.Session = requests.Session()
         self._host: str = f"{host}{':' + str(port) if port else ''}"
-        self._timeouts: tuple = (5, 5)
+        self._timeouts: tuple[float, float] = (5, 5)
         self.set_retries()
         self.set_user_agent()
 

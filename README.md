@@ -10,6 +10,24 @@ configurable HTTP python client that supports
 - uses ultra-fast 'ujson' library for serialization'
 - etc.
 
+### Install pyclient
+
+```shell
+git clone clone git@github.com:vspaz/pyclient.git
+cd pyclient
+
+pip3 install .
+````
+
+### Run tests
+
+```shell
+pip3 install -r requirements/dev.txt
+make test
+```
+
+### Use
+
 ```python
 from pyclient.http import PyClient
 
@@ -29,5 +47,4 @@ if __name__ == '__main__':
     # or simply
     http_client = PyClient.get_http_client()
     print(http_client.do_get(path='https://httpbin.org/get').json())
-
 ```
